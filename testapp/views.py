@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 import subprocess
 import os
 import signal
@@ -47,15 +47,12 @@ def get_transcription():
         if os.path.exists(output_file):  # ファイルが存在する場合
             with open(output_file, 'r', encoding='utf-8') as f:
                 content = f.read()
-            print(f"DEBUG: File content read: {content}")  # デバッグ用
             return jsonify({"transcription": content}), 200
         else:
-            print("DEBUG: File does not exist")
             return jsonify({"transcription": ""}), 200
     except Exception as e:
-        print(f"DEBUG: Error occurred: {e}")
         return jsonify({"error": str(e)}), 500
-        
+
 @app.route('/delete-transcription', methods=['POST'])
 def delete_transcription():
     """
@@ -70,7 +67,31 @@ def delete_transcription():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/run-download-script', methods=['POST'])
+def run_download_script():
+    try:
+        # download.py を実行
+        process = subprocess.Popen(
+            ['python', 'download.py'], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+        stdout, stderr = process.communicate()
+
+        if process.returncode == 0:
+            return jsonify({"message": "Download script executed successfully", "details": stdout.decode()}), 200
+        else:
+            return jsonify({"error": stderr.decode()}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/download-transcription', methods=['GET'])
+def download_transcription():
+    """
+    ファイルをダウンロードする
+    """
+    try:
+        return send_file(output_file, as_attachment=True)
+    except FileNotFoundError:
+        return jsonify({"error": "File not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

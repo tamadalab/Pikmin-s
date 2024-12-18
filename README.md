@@ -29,6 +29,8 @@ Mojimin
    ダウンロードやリセットや録音などのボタンを押した場合に各々のプログラムを実行するプログラム
   <li>index.html</li>
    webデザインを表示させるプログラム
+  <li>post.py</li>
+   esa.ioに投稿するプログラム
   <li>mojimin.png</li>
    アイコン
 

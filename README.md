@@ -19,18 +19,18 @@ Mojimin
 
 <h2>ファイル</h2>
 <ol>
-  <li>・maketest.py</li>
-  <li>whisperというAIを利用した文字起こしするプログラム</li>
-  <li>・download.py</li>
-  <li>文字起こしした内容をダウンロードするプログラム</li>
-  <li>・server/py</li>
-  <li>Flaskアプリを起動するプログラム</li>
-  <li>・views.py</li>
-  <li>ダウンロードやリセットや録音などのボタンを押した場合に各々のプログラムを実行するプログラム</li>
-  <li>・index.html</li>
-  <li>webデザインを表示させるプログラム</li>
-  <li>・mojimin.png</li>
-  <li>アイコン</li>
+  <li>maketest.py</li>
+  <h2>whisperというAIを利用した文字起こしするプログラム</h2>
+  <li>download.py</li>
+  <h2>文字起こしした内容をダウンロードするプログラム</h2>
+  <li>server/py</li>
+  <h2>Flaskアプリを起動するプログラム</h2>
+  <li>views.py</li>
+  <h2>ダウンロードやリセットや録音などのボタンを押した場合に各々のプログラムを実行するプログラム</h2>
+  <li>index.html</li>
+  <h2>webデザインを表示させるプログラム</h2>
+  <li>mojimin.png</li>
+  <h2>アイコン</h2>
 
 </ol>
 

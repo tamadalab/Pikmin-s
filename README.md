@@ -30,7 +30,7 @@ Mojimin
   <li>index.html</li>
   <h2>webデザインを表示させるプログラム</h2>
   <li>mojimin.png</li>
-  <h2>アイコン</h2>
+  アイコン
 
 </ol>
 

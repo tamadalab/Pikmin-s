@@ -95,3 +95,18 @@ def download_transcription():
         return jsonify({"error": "File not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/execute-post', methods=['POST'])
+def execute_post():
+    try:
+        # post.pyを実行
+        result = subprocess.run(['python', 'post.py'], capture_output=True, text=True)
+        if result.returncode == 0:
+            return {"message": "Post script executed successfully"}, 200
+        else:
+            return {"error": result.stderr}, 500
+    except Exception as e:
+        return {"error": str(e)}, 500
+
+if __name__ == '__main__':
+    app.run(debug=True)

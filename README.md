@@ -36,6 +36,19 @@ Mojimin
 
 </ol>
 
+<h2>使用したライブラリ</h2>
+・pyaudio
+Pythonでオーディオ操作(マイク)を簡単に利用できます。
+　pip install pyaudio
+<h2>使用したフレームワーク</h2>
+・flask
+ pip install flask
+Pythonでwebアプリを作成することができます。
+<h2>使用したオープンソース</h2>
+・whisper
+文字起こしに特化したOpenAi
+!pip install -q git+https://github.com/openai/whisper.git
+
 <h2>開発環境</h2>
 <h3>使用技術・ライブララリ</h3>
 <div>

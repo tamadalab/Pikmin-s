@@ -11,8 +11,8 @@ FORMAT = pyaudio.paInt16
 SAMPLE_RATE = 44100        # サンプリングレート
 CHANNELS = 1               # モノラル
 INPUT_DEVICE_INDEX = 0     # マイクのデバイスインデックス
-THRESHOLD = 100            # 無音の判定基準
-SILENCE_DURATION = 1       # 無音とみなす秒数
+THRESHOLD = 100            # 無音の判定基準 振幅が平均100未満の場合出力する
+SILENCE_DURATION = 0.5       # 無音とみなす秒数
 
 # 出力ファイルのパスを指定
 output_file = os.path.join(os.path.dirname(__file__), "output.txt")

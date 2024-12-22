@@ -6,7 +6,7 @@ from tkinter import filedialog
 def download_file(source_path):
     # ファイル保存ダイアログを表示
     root = tk.Tk()
-    root.withdraw()  # メインウィンドウを非表示にする
+    root.withdraw()  # メインウィンドウを非表示
 
     destination_path = filedialog.asksaveasfilename(
         title="保存先を選択",  # タイトル

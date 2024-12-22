@@ -52,6 +52,9 @@ Pythonでwebアプリを作成することができます。
 文字起こしに特化したOpenAi
 !pip install -q git+https://github.com/openai/whisper.git
 
+<h2>実行前に必要なこと</h2>
+post.pyにAPIを入力する必要がある
+
 <h2>開発環境</h2>
 <h3>使用技術・ライブララリ</h3>
 <div>

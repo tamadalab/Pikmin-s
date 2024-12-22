@@ -2,7 +2,7 @@ import re
 import requests
 
 FILE_PATH = "output.txt"  # 読み取るファイルのパス
-ESA_ACCESS_TOKEN = "GWHibQwA8UhG0_EI2RWCNH4HOPBw8zN3RmtXN1t7fZE"  # ESA API トークン
+ESA_ACCESS_TOKEN = ""  # ESA API トークン
 ESA_TEAM = "tamadalab"          # チーム名
 
 def main():

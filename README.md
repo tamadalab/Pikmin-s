@@ -3,7 +3,7 @@
   
 </div>
 <h2>システム名</h2>
-もじみん
+Pikmins
 
 <h2>デモ動画</h2>
 https://github.com/user-attachments/assets/1885b8c3-062e-4f5b-a846-bc2b372856f1

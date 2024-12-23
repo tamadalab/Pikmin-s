@@ -1,4 +1,4 @@
-<h1 align="center"><img src="https://github.com/user-attachments/assets/42cbb20f-106e-4a33-891f-0e4fd71a875f" alt="モジミンアイコン" width="50px">Pikmin-s!<img src="https://github.com/user-attachments/assets/42cbb20f-106e-4a33-891f-0e4fd71a875f" alt="モジミンアイコン" width="50px"></h1>
+<h1 align="center"><img src="https://github.com/user-attachments/assets/42cbb20f-106e-4a33-891f-0e4fd71a875f" alt="モジミンアイコン" width="50px">Pikmins<img src="https://github.com/user-attachments/assets/42cbb20f-106e-4a33-891f-0e4fd71a875f" alt="モジミンアイコン" width="50px"></h1>
 <div>
   
 </div>

@@ -1,0 +1,24 @@
+services:
+  jupyterlab:
+    build: .
+    image: jupyterlab-test-img
+    container_name: jupyterlab-test
+    working_dir: /Pikmin-s
+    volumes:
+      - ./Pikmin-s:/Pikmin-s
+    ports:
+      - "8888:8888"
+    command: >
+      jupyter-lab --ip=0.0.0.0 --allow-root
+
+  flaskapp:
+    build: .
+    image: flaskapp-test-img
+    container_name: flaskapp-test
+    working_dir: /Pikmin-s
+    volumes:
+      - ./Pikmin-s:/Pikmin-s
+    ports:
+      - "5000:5000"
+    command: >
+      flask run --host=0.0.0.0

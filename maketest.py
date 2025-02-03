@@ -1,6 +1,5 @@
 import wave
 import time
-from datetime import datetime
 import pyaudio
 import whisper
 import numpy as np
@@ -37,8 +36,7 @@ def transcribe_audio():
         result = model.transcribe("temp_audio.wav", language="ja")
         # output.txt に文字起こし結果を追記
         with open(output_file, 'a', encoding='utf-8') as f:  # 'a' モードで追記
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            f.write(f"[{timestamp}] {result['text']}\n")
+            f.write(f"{result['text']}\n")
             f.flush()  # 書き込みを即座に反映
     except Exception as e:
         pass  # エラー時も何も表示しない

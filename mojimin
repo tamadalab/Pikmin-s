@@ -1,7 +1,0 @@
-<script>start("/Users/syuta/Pikmin-s/mojimin/");</script>
-<script>onHasParentDirectory();</script>
-<script>addRow("__pycache__","__pycache__",1,160,"160 B",1734689087,"2024/12/20 19:04:47");</script>
-<script>addRow("static","static",1,96,"96 B",1733979541,"2024/12/12 13:59:01");</script>
-<script>addRow("templates","templates",1,128,"128 B",1734188789,"2024/12/15 0:06:29");</script>
-<script>addRow(".DS_Store",".DS_Store",0,8196,"8.0 kB",1734688885,"2024/12/20 19:01:25");</script>
-<script>addRow("views.py","views.py",0,3808,"3.7 kB",1734689024,"2024/12/20 19:03:44");</script>

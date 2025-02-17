@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>もじみん</title>
+    <link rel="icon" href="{{ url_for('static', filename='mojimin.png') }}" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #32cd32;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header img {
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        .record-area {
+            text-align: center;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .record-area button {
+            background-color: #32cd32;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .record-area button:hover {
+            background-color: #28a428;
+        }
+
+        .real-time-area {
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .real-time-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .real-time-header h2 {
+            margin: 0;
+        }
+
+        .real-time-header button {
+            background-color: #ff4c4c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .real-time-header button:hover {
+            background-color: #e04444;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #32cd32;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='mojimin.png') }}" alt="App Icon">
+        <h1 style="margin: 0;">Pikmins</h1>
+        <img src="{{ url_for('static', filename='mojimin.png') }}" alt="App Icon">
+    </header>
+
+    <main>
+        <!-- Record Area -->
+        <div class="record-area">
+            <h2>録音を操作</h2>
+            <button id="startRecording">録音開始</button>
+            <button id="stopRecording" disabled>録音停止</button>
+            <button id="postTranscription">投稿</button>
+            <button id="downloadTranscription">ダウンロード</button>
+            <p id="recordingStatus" style="margin-top: 10px;">録音が開始されていません</p>
+        </div>
+
+        <div id="timerDisplay" style="display: none;">6</div>
+
+        <!-- Real-time Transcription Area -->
+        <div class="real-time-area">
+            <div class="real-time-header">
+                <h2>リアルタイム文字起こし</h2>
+                <button id="resetTranscription">リセット</button>
+            </div>
+            <div id="transcriptionArea" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+                <!-- 文字起こし内容がここに表示されます -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 Pikmins</p>
+    </footer>
+
+    <script>
+        // 要素の取得
+        const startButton = document.getElementById('startRecording');
+        const stopButton = document.getElementById('stopRecording');
+        const postButton = document.getElementById('postTranscription');
+        const downloadButton = document.getElementById('downloadTranscription');
+        const resetButton = document.getElementById('resetTranscription');
+        const statusText = document.getElementById('recordingStatus');
+        const transcriptionArea = document.getElementById('transcriptionArea');
+        const timerDisplay = document.getElementById('timerDisplay');
+
+        // タイマー関数
+        function startTimer(seconds) {
+            let remainingTime = seconds;
+
+            // タイマーを表示
+            timerDisplay.style.display = 'flex';
+            timerDisplay.style.position = 'fixed';
+            timerDisplay.style.top = '50%';
+            timerDisplay.style.left = '50%';
+            timerDisplay.style.transform = 'translate(-50%, -50%)';
+            timerDisplay.style.fontSize = '1000px';
+            timerDisplay.style.fontWeight = 'bold';
+            timerDisplay.style.color = '#32cd32';
+            timerDisplay.textContent = remainingTime;
+
+            // 1秒ごとにカウントダウン
+            const timerInterval = setInterval(() => {
+                remainingTime--;
+                if (remainingTime <= 0) {
+                    clearInterval(timerInterval); // タイマーを停止
+                    timerDisplay.style.display = 'none'; // タイマーを非表示
+                } else {
+                    timerDisplay.textContent = remainingTime;
+                }
+            }, 1000);
+        }
+
+        // 録音開始関数
+        function startRecording() {
+            // カウントダウンを開始
+            startTimer(7);
+
+            // maketest.py を実行
+            fetch('/run-maketest', { method: 'POST' })
+            .then(response => {
+            if (response.ok) {
+                console.log("maketest.pyが正常に実行されました。");
+            } else {
+                console.error("maketest.pyの実行中にエラーが発生しました。");
+            }
+            })
+            .catch(error => console.error("エラー:", error));
+
+        // サーバーに録音開始をリクエスト
+            fetch('/start-recording', { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    setTimeout(() => { statusText.textContent = '録音中...'; }, 6000);
+                    startButton.disabled = true;
+                    stopButton.disabled = false;
+                } else {
+                alert("録音開始中にエラーが発生しました。");
+                }
+            })
+            .catch(error => console.error("エラー:", error));
+        }
+
+        // 録音停止
+        stopButton.addEventListener('click', () => {
+            fetch('/stop-recording', { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        statusText.textContent = '録音停止';
+                        startButton.disabled = false;
+                        stopButton.disabled = true;
+                    } else {
+                        alert("録音停止中にエラーが発生しました。");
+                    }
+                })
+                .catch(error => console.error("エラー:", error));
+        });
+
+        // リセット
+        resetButton.addEventListener('click', () => {
+            fetch('/delete-transcription', { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        transcriptionArea.innerHTML = '';
+                        alert("文字起こしデータが削除されました。");
+                    } else {
+                        alert("データ削除中にエラーが発生しました。");
+                    }
+                })
+                .catch(error => console.error("エラー:", error));
+        });
+
+        // ダウンロード
+downloadButton.addEventListener('click', () => {
+    fetch('/run-download-script', { method: 'POST' })
+        .catch(error => {
+            // ダウンロードキャンセル時はコンソールログのみ記録
+            console.error("エラー:", error);
+        });
+});
+
+
+        // サーバーからデータを取得してリアルタイム更新
+        setInterval(() => {
+            fetch('/get-transcription')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.transcription) {
+                        transcriptionArea.innerHTML = data.transcription.replace(/\n/g, "<br>");
+                    } else {
+                        transcriptionArea.innerHTML = "<p>データがありません</p>";
+                    }
+                })
+                .catch(error => console.error("DEBUG: Fetch error:", error));
+        }, 1000);
+
+        // 録音開始ボタン
+        startButton.addEventListener('click', () => { startTimer(7); startRecording(); });
+        
+        // 投稿ボタンのクリックイベント
+    postButton.addEventListener('click', () => {
+        fetch('/execute-post', { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    alert("esa.ioに投稿しました。");
+                } else {
+                    alert("投稿中にエラーが発生しました。");
+                }
+            })
+            .catch(error => console.error("エラー:", error));
+    });
+
+    </script>
+</body>
+
+</html>

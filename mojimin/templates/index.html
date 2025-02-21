@@ -180,13 +180,13 @@
             // カウントダウンを開始
             startTimer(7);
 
-            // maketest.py を実行
+            // transcription.py を実行
             fetch('/run-maketest', { method: 'POST' })
             .then(response => {
             if (response.ok) {
-                console.log("maketest.pyが正常に実行されました。");
+                console.log("transcription.pyが正常に実行されました。");
             } else {
-                console.error("maketest.pyの実行中にエラーが発生しました。");
+                console.error("transcription.pyの実行中にエラーが発生しました。");
             }
             })
             .catch(error => console.error("エラー:", error));

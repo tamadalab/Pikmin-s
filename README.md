@@ -1,9 +1,9 @@
-<h1 align="center"><img src="https://github.com/user-attachments/assets/42cbb20f-106e-4a33-891f-0e4fd71a875f" alt="モジミンアイコン" width="50px">チーム名:Pikmins<img src="https://github.com/user-attachments/assets/42cbb20f-106e-4a33-891f-0e4fd71a875f" alt="モジミンアイコン" width="50px"></h1>
+<h1 align="center"><img src="https://github.com/user-attachments/assets/42cbb20f-106e-4a33-891f-0e4fd71a875f" alt="モジミンアイコン" width="50px">チーム名:Pikmin-s<img src="https://github.com/user-attachments/assets/42cbb20f-106e-4a33-891f-0e4fd71a875f" alt="モジミンアイコン" width="50px"></h1>
 <div>
   
 </div>
 <h2>システム名</h2>
-文字ミン
+モジミン
 
 <h2>デモ動画</h2>
 https://github.com/user-attachments/assets/1885b8c3-062e-4f5b-a846-bc2b372856f1

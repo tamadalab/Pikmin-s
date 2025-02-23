@@ -19,8 +19,8 @@ def index():
 def start_recording():
     global process
     try:
-        # maketest.py をバックグラウンドで実行
-        process = subprocess.Popen(['python', 'maketest.py'])
+        # transcription.py をバックグラウンドで実行
+        process = subprocess.Popen(['python', 'transcription.py'])
         return jsonify({"message": "Recording started successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500

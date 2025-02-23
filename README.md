@@ -3,7 +3,7 @@
   
 </div>
 <h2>システム名</h2>
-Pikmins
+Mojimin
 
 <h2>デモ動画</h2>
 https://github.com/user-attachments/assets/1885b8c3-062e-4f5b-a846-bc2b372856f1
@@ -22,7 +22,7 @@ https://github.com/user-attachments/assets/1885b8c3-062e-4f5b-a846-bc2b372856f1
 
 <h2>ファイル</h2>
 <ol>
-  <li>maketest.py</li>
+  <li>transcription.py</li>
    whisperというAIを利用した文字起こしするプログラム
   <li>download.py</li>
    文字起こしした内容をダウンロードするプログラム
@@ -30,6 +30,8 @@ https://github.com/user-attachments/assets/1885b8c3-062e-4f5b-a846-bc2b372856f1
    Flaskアプリを起動するプログラム
   <li>views.py</li>
    ダウンロードやリセットや録音などのボタンを押した場合に各々のプログラムを実行するプログラム
+  <li>summary.py</li>
+   録音した音声を要約するプログラム
   <li>index.html</li>
    webデザインを表示させるプログラム
   <li>post.py</li>
@@ -43,6 +45,14 @@ https://github.com/user-attachments/assets/1885b8c3-062e-4f5b-a846-bc2b372856f1
 ・pyaudio
 Pythonでオーディオ操作(マイク)を簡単に利用できます。
 　pip install pyaudio
+
+・transformers
+テキスト要約を行うためのライブラリです。
+ pip install transformers
+
+・googletrans
+英文から和文へGoogle翻訳を行うためのライブラリです。
+ pip install googletrans==4.0.0-rc1
 <h2>使用したフレームワーク</h2>
 ・flask
  pip install flask

@@ -116,6 +116,7 @@
             <button id="stopRecording" disabled>録音停止</button>
             <button id="postTranscription">投稿</button>
             <button id="downloadTranscription">ダウンロード</button>
+            <button id="summarizeTranscription">要約</button>
             <p id="recordingStatus" style="margin-top: 10px;">録音が開始されていません</p>
         </div>
 
@@ -131,6 +132,15 @@
                 <!-- 文字起こし内容がここに表示されます -->
             </div>
         </div>
+
+        <!-- Summary Area -->
+        <div class="summary-area">
+            <h2>要約</h2>
+            <div id="summaryContent" style="height: 150px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+                <!-- 要約内容がここに表示されます -->
+            </div>
+        </div>
+        
     </main>
 
     <footer>
@@ -143,6 +153,7 @@
         const stopButton = document.getElementById('stopRecording');
         const postButton = document.getElementById('postTranscription');
         const downloadButton = document.getElementById('downloadTranscription');
+        const summarizeButton = document.getElementById('summarizeTranscription');
         const resetButton = document.getElementById('resetTranscription');
         const statusText = document.getElementById('recordingStatus');
         const transcriptionArea = document.getElementById('transcriptionArea');
@@ -274,6 +285,19 @@ downloadButton.addEventListener('click', () => {
                     alert("esa.ioに投稿しました。");
                 } else {
                     alert("投稿中にエラーが発生しました。");
+                }
+            })
+            .catch(error => console.error("エラー:", error));
+    });
+
+    // 要約ボタンのクリックイベント
+    summarizeButton.addEventListener('click', () => {
+        fetch('/execute-summary', { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    alert("要約が完了しました。");
+                } else {
+                    alert("要約中にエラーが発生しました。");
                 }
             })
             .catch(error => console.error("エラー:", error));
